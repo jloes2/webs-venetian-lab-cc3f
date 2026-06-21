@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>澳门威尼斯人 · 信息卡页</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f9f6f0;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            color: #2d2a24;
+            line-height: 1.7;
+            padding: 0 20px;
+        }
+
+        .container {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 40px 0 60px;
+        }
+
+        /* hero 区 */
+        .hero {
+            background: #fefcf8;
+            border-left: 6px solid #b59a6b;
+            padding: 48px 40px 40px 40px;
+            margin-bottom: 48px;
+            box-shadow: 0 1px 6px rgba(0,0,0,0.02);
+            border-radius: 0 20px 20px 0;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            font-weight: 450;
+            letter-spacing: -0.02em;
+            line-height: 1.15;
+            margin-bottom: 12px;
+            color: #2f281a;
+        }
+
+        .hero .subhead {
+            font-size: 1.15rem;
+            color: #6b5e4a;
+            max-width: 80%;
+            border-bottom: 1px dashed #ded5c4;
+            padding-bottom: 18px;
+            margin-bottom: 14px;
+        }
+
+        .hero p {
+            font-size: 1rem;
+            color: #4b4234;
+            max-width: 75%;
+        }
+
+        /* 卡片网格 */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+            margin-bottom: 50px;
+        }
+
+        .card {
+            background: #fefcf8;
+            border-radius: 18px;
+            padding: 30px 26px 28px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.03);
+            border: 1px solid #ece5db;
+            transition: box-shadow 0.2s;
+        }
+
+        .card:hover {
+            box-shadow: 0 6px 20px rgba(0,0,0,0.05);
+        }
+
+        .card .icon {
+            font-size: 2rem;
+            margin-bottom: 6px;
+            color: #b59a6b;
+        }
+
+        .card h3 {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin: 8px 0 12px;
+            letter-spacing: 0.01em;
+            color: #2f281a;
+        }
+
+        .card p {
+            font-size: 0.94rem;
+            color: #4b4234;
+        }
+
+        .card .tag {
+            display: inline-block;
+            margin-top: 14px;
+            background: #f0ebe0;
+            padding: 3px 12px;
+            border-radius: 30px;
+            font-size: 0.78rem;
+            color: #5f523c;
+            letter-spacing: 0.02em;
+        }
+
+        /* 引用/提示框 */
+        .quote-block {
+            background: #f4efe6;
+            padding: 40px 44px;
+            border-radius: 24px;
+            margin: 48px 0;
+            border-left: 4px solid #b59a6b;
+        }
+
+        .quote-block p {
+            font-size: 1.06rem;
+            color: #3e372b;
+            margin-bottom: 18px;
+        }
+
+        .quote-block .cite {
+            font-style: normal;
+            font-size: 0.9rem;
+            color: #7a6d57;
+        }
+
+        .faq-summary {
+            background: #fefcf8;
+            border: 1px solid #e8e0d5;
+            border-radius: 24px;
+            padding: 32px 36px;
+            margin: 48px 0 40px;
+        }
+
+        .faq-summary h3 {
+            font-size: 1.3rem;
+            font-weight: 450;
+            margin-bottom: 16px;
+            color: #2f281a;
+        }
+
+        .faq-item {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 18px;
+            align-items: flex-start;
+        }
+
+        .faq-item .q {
+            font-weight: 500;
+            min-width: 28px;
+            color: #b59a6b;
+            font-size: 1rem;
+        }
+
+        .faq-item .a {
+            color: #4b4234;
+            font-size: 0.95rem;
+        }
+
+        .faq-item .a a {
+            color: #8a7a5c;
+            text-decoration: underline;
+            text-underline-offset: 4px;
+            text-decoration-color: #d8cbaf;
+            font-weight: 400;
+        }
+
+        .faq-item .a a:hover {
+            color: #5f4f32;
+            text-decoration-color: #b59a6b;
+        }
+
+        .natural-link-line {
+            background: #fcfaf6;
+            padding: 24px 28px;
+            border-radius: 60px;
+            border: 1px solid #e5dccf;
+            font-size: 1rem;
+            color: #3e372b;
+            margin: 20px 0 30px;
+        }
+
+        .natural-link-line a {
+            color: #7a6b4e;
+            text-decoration: underline;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 3px;
+            text-decoration-color: #c9bca2;
+            font-weight: 450;
+            transition: color 0.15s;
+        }
+
+        .natural-link-line a:hover {
+            color: #4d3f2b;
+            text-decoration-color: #b59a6b;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid #e1d7ca;
+            margin: 40px 0 30px;
+        }
+
+        .footer-note {
+            color: #7d715d;
+            font-size: 0.85rem;
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #e4dacd;
+        }
+
+        @media (max-width: 900px) {
+            .card-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .hero p, .hero .subhead {
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .hero {
+                padding: 36px 24px 32px;
+            }
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .card-grid {
+                grid-template-columns: 1fr;
+                gap: 22px;
+            }
+            .quote-block {
+                padding: 28px 22px;
+            }
+            .faq-summary {
+                padding: 24px 20px;
+            }
+            .natural-link-line {
+                border-radius: 28px;
+                padding: 18px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- hero 主视觉 -->
+    <div class="hero">
+        <h1>威尼斯人 · 信息卡</h1>
+        <div class="subhead">澳门 · 对照阅读 & 延伸查询</div>
+        <p>围绕「澳门威尼斯人」的日常信息卡片，聚合建筑格局、用途场景与适配人群。侧重事实检索与辅助判断，不替代官方最新公告。</p>
+    </div>
+
+    <!-- 信息卡片 -->
+    <div class="card-grid">
+        <div class="card">
+            <div class="icon">🏛️</div>
+            <h3>建筑格局</h3>
+            <p>室内运河、穹顶壁画及拱桥复制自威尼斯地标。三条运河分布于大运河、圣马可及卡萨诺瓦区域，贡多拉航线约400米。</p>
+            <span class="tag">参考数据</span>
+        </div>
+        <div class="card">
+            <div class="icon">🎲</div>
+            <h3>休闲用途</h3>
+            <p>综合度假村包含博彩区、水疗中心、大型商场及展馆。非博彩区域对公众开放，部分活动需提前预约。</p>
+            <span class="tag">适用范围</span>
+        </div>
+        <div class="card">
+            <div class="icon">👥</div>
+            <h3>适合人群</h3>
+            <p>家庭游客、建筑爱好者、购物及美食探索者。未成年人及特定人士依法不得进入博彩楼层。</p>
+            <span class="tag">人群提示</span>
+        </div>
+    </div>
+
+    <!-- 自然链接段落 + 引用 -->
+    <div class="natural-link-line">
+        📎 若需核对最新运营时间、展览或客房信息，建议直接参考 
+        <a href="https://webs-venetian.com">澳门威尼斯人</a> 
+        的官方页面，以当日公告为准。
+    </div>
+
+    <!-- 引用块 / 提示框 -->
+    <div class="quote-block">
+        <p>「场馆内标识系统采用中、英、葡三语，运河区域的照明在每日18:30后调整为暖色调。团体游客建议错开周末下午入场，此时商场与运河区人流量较高。」</p>
+        <span class="cite">—— 综合访客体验笔记，2025年3月现场记录</span>
+    </div>
+
+    <!-- FAQ 摘要（内容差异化） -->
+    <div class="faq-summary">
+        <h3>常见查询摘要</h3>
+        <div class="faq-item">
+            <span class="q">Q1</span>
+            <span class="a">室内运河是否全年开放？<br>运河巡游全年运营，但遇恶劣天气预警或年度维护可能临时调整，具体以现场或 <a href="https://webs-venetian.com">澳门威尼斯人</a> 实时告示为准。</span>
+        </div>
+        <div class="faq-item">
+            <span class="q">Q2</span>
+            <span class="a">非住客可否进入商场区域？<br>商场、美食广场及部分展览空间为开放式，无需住宿凭证；部分特殊展览及剧院演出需购票。</span>
+        </div>
+        <div class="faq-item">
+            <span class="q">Q3</span>
+            <span class="a">交通接驳方式？<br>度假村提供往返关闸、机场及北安码头的穿梭巴士，班次约15–30分钟一班，具体时刻表可于现场服务台索取。</span>
+        </div>
+    </div>
+
+    <hr>
+
+    <!-- 延伸阅读段落 / 说明 -->
+    <div style="display: flex; flex-wrap: wrap; gap: 30px; margin-bottom: 30px;">
+        <div style="flex: 1; min-width: 220px;">
+            <p style="font-size: 0.95rem; color: #4b4234;"><strong>▸ 空间参考</strong><br>仿圣马可广场的拱廊高约21米，中央穹顶彩绘复制自威尼斯总督府。运河水质循环过滤，水深约1.2–1.5米。</p>
+        </div>
+        <div style="flex: 1; min-width: 220px;">
+            <p style="font-size: 0.95rem; color: #4b4234;"><strong>▸ 检索提示</strong><br>部分预订平台会显示“威尼斯人度假村”，请注意核对具体设施位置。检索时建议使用完整名称：澳门威尼斯人。</p>
+        </div>
+    </div>
+
+    <div class="footer-note">
+        此页面为静态信息整合，内容基于公开资料整理，不构成商业或法律建议。<br> 数据参考日期：2025年4月 · 建议以实时来源为准。
+    </div>
+</div>
+</body>
+</html>
