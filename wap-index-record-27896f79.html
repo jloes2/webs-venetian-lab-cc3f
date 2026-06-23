@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>再回乐鱼 · 一份安静的陪伴</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f4f2ed;
+            color: #2a2a2a;
+            line-height: 1.7;
+            letter-spacing: 0.02em;
+        }
+
+        .hero {
+            background: linear-gradient(145deg, #1e1e24 0%, #2c2a33 100%);
+            padding: 4rem 1.5rem 3.5rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -20%;
+            left: -10%;
+            width: 140%;
+            height: 140%;
+            background: radial-gradient(circle at 30% 40%, rgba(235, 195, 125, 0.06) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero h1 {
+            font-size: 2.3rem;
+            font-weight: 380;
+            color: #ece7dd;
+            letter-spacing: 0.08em;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero .sub {
+            font-size: 1rem;
+            color: #b7ad9a;
+            max-width: 500px;
+            margin: 0 auto 1.2rem;
+            font-weight: 300;
+            line-height: 1.8;
+        }
+
+        .hero .highlight {
+            display: inline-block;
+            color: #d4b483;
+            border-bottom: 1px solid rgba(212, 180, 131, 0.3);
+            padding-bottom: 2px;
+        }
+
+        .container {
+            max-width: 780px;
+            margin: 0 auto;
+            padding: 2.8rem 1.5rem 3.5rem;
+        }
+
+        .intro-card {
+            background: white;
+            border-radius: 28px;
+            padding: 2.5rem 2rem;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
+            margin-bottom: 2.8rem;
+        }
+
+        .intro-card p {
+            margin-bottom: 1.6rem;
+            font-size: 1.05rem;
+            color: #3d3b36;
+        }
+
+        .intro-card p:last-child {
+            margin-bottom: 0;
+        }
+
+        .section-title {
+            font-size: 1.4rem;
+            font-weight: 400;
+            color: #2e2b26;
+            margin: 2.8rem 0 1.8rem 0;
+            letter-spacing: 0.03em;
+            border-left: 4px solid #c9ad7a;
+            padding-left: 1rem;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2.8rem;
+        }
+
+        .feature-item {
+            background: white;
+            border-radius: 24px;
+            padding: 1.8rem 1.5rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02), 0 4px 12px rgba(0, 0, 0, 0.03);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+        }
+
+        .feature-item h3 {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #3a352e;
+            margin-bottom: 0.6rem;
+        }
+
+        .feature-item h3 span {
+            display: inline-block;
+            margin-right: 0.5rem;
+            color: #b38f5e;
+        }
+
+        .feature-item p {
+            font-size: 0.95rem;
+            color: #5e5a52;
+            line-height: 1.7;
+        }
+
+        .reminder-box {
+            background: #eae5db;
+            border-radius: 28px;
+            padding: 2rem 2rem 1.8rem;
+            margin: 2.5rem 0 2rem;
+        }
+
+        .reminder-box p {
+            color: #3d3932;
+            font-size: 1rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .reminder-box .action-link {
+            display: inline-block;
+            margin-top: 0.4rem;
+        }
+
+        a {
+            color: #7f643c;
+            text-decoration: none;
+            font-weight: 450;
+            border-bottom: 1px solid rgba(127, 100, 60, 0.2);
+            transition: border-color 0.2s, color 0.2s;
+        }
+
+        a:hover {
+            color: #a77c48;
+            border-bottom-color: #a77c48;
+        }
+
+        .faq-mini {
+            margin-top: 3rem;
+            border-top: 1px solid #ddd8ce;
+            padding-top: 2.2rem;
+        }
+
+        .faq-mini details {
+            margin-bottom: 1.2rem;
+            background: white;
+            border-radius: 20px;
+            padding: 0.8rem 1.4rem;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.02);
+        }
+
+        .faq-mini summary {
+            font-weight: 470;
+            color: #2f2b25;
+            cursor: pointer;
+            padding: 0.3rem 0;
+            font-size: 1rem;
+            list-style: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .faq-mini summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .faq-mini summary::before {
+            content: '▸';
+            display: inline-block;
+            margin-right: 0.8rem;
+            color: #b38f5e;
+            transition: transform 0.2s;
+            font-size: 1.2rem;
+            line-height: 1;
+        }
+
+        .faq-mini details[open] summary::before {
+            transform: rotate(90deg);
+        }
+
+        .faq-mini .answer {
+            padding: 0.6rem 0 0.4rem 2rem;
+            color: #4d4942;
+            font-size: 0.97rem;
+        }
+
+        .footer-note {
+            margin-top: 3.5rem;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #7c776c;
+            border-top: 1px solid #e0dbcf;
+            padding-top: 2rem;
+        }
+
+        .footer-note a {
+            color: #6f5b3c;
+        }
+
+        @media (max-width: 500px) {
+            .hero {
+                padding: 3rem 1rem 2.8rem;
+            }
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            .intro-card {
+                padding: 1.8rem 1.2rem;
+            }
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+            .container {
+                padding: 1.8rem 1rem 2.8rem;
+            }
+            .reminder-box {
+                padding: 1.4rem 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="hero">
+        <h1>又见面了。</h1>
+        <div class="sub">
+            有些角落，值得你再次步入。<br>
+            不喧哗，不催促，只是静静地等在那里。
+        </div>
+        <div class="sub">
+            这里是 <span class="highlight">你的收藏夹里</span> 还留着的那页。
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="intro-card">
+            <p>
+                上一次关掉标签页的时候，可能只是临时走开，或是被别的事打断了。后来再想起，却一时没找到入口。网海里的地址总是来去匆匆，能让人愿意重新记起的，往往不只是功能，而是一种顺手、安心的感觉。
+            </p>
+            <p>
+                这个页面叫 <a href="https://wap-index-leyu.com">乐鱼</a> —— 一个不算新、但始终保持着原本节奏的地方。没有频繁改版，没有弹窗催促，你上次离开时的样子，它大致还记得。
+            </p>
+            <p>
+                如果你已经把它放进书签栏，或只是保存在聊天记录里，那很好；如果还没有，或许这次可以停留片刻，再看看它是否依然合意。
+            </p>
+        </div>
+
+        <h2 class="section-title">依然熟悉的一些特点</h2>
+
+        <div class="feature-grid">
+            <div class="feature-item">
+                <h3><span>·</span> 轻盈的加载</h3>
+                <p>页面结构干净，没有冗余脚本。无论网络状况如何，内容都能较快呈现，不浪费等待的时间。</p>
+            </div>
+            <div class="feature-item">
+                <h3><span>·</span> 克制的视觉</h3>
+                <p>不堆砌动效和色彩，信息层级清晰。眼睛不会感到疲惫，适合在碎片时间里安静浏览。</p>
+            </div>
+            <div class="feature-item">
+                <h3><span>·</span> 稳定的入口</h3>
+                <p>域名长期维护，没有频繁跳转。你收藏的那个地址，依然通向相同的地方。</p>
+            </div>
+            <div class="feature-item">
+                <h3><span>·</span> 不打扰的陪伴</h3>
+                <p>没有强制推送、没有浮层引导。你来或不来，它都在那里，不增加认知负担。</p>
+            </div>
+        </div>
+
+        <div class="reminder-box">
+            <p><strong>有时候，重新打开一个页面，就像翻开一本读到一半的书。</strong></p>
+            <p>页签还在，书签没丢，你与 <a href="https://wap-index-leyu.com">乐鱼</a> 之间的那根线，其实一直没有断。只是需要轻轻一点，就续上了。</p>
+            <p style="margin-top:1.2rem; font-size:0.95rem; color:#5f584c;">
+                如果你愿意，可以把这个地址留在常用列表里。下次再来，不必翻找。
+            </p>
+        </div>
+
+        <div class="faq-mini">
+            <details>
+                <summary>为什么我收藏的地址还能打开？</summary>
+                <div class="answer">
+                    因为这个站点一直保持基础维护，没有随意更换域名或路径。只要你不主动删除书签，它就会一直在。
+                </div>
+            </details>
+            <details>
+                <summary>页面内容会经常变化吗？</summary>
+                <div class="answer">
+                    核心体验和布局倾向于稳定，偶尔会有细微调整，但不会突然变得陌生。你可以放心把它当作一个长期据点。
+                </div>
+            </details>
+            <details>
+                <summary>我可以在不同设备上使用同一个书签吗？</summary>
+                <div class="answer">
+                    当然可以。只要登录同一浏览器账户或同步书签，手机、平板、电脑上都能快速到达 <a href="https://wap-index-leyu.com">乐鱼</a>。
+                </div>
+            </details>
+        </div>
+
+        <div class="footer-note">
+            <p>也许下一次打开，就是某个平常的午后。<br>
+            地址不变，感受如初。</p>
+            <p style="margin-top:1rem;">
+                <a href="https://wap-index-leyu.com" style="border-bottom:1px solid rgba(127,100,60,0.2);">乐鱼</a> · 再访无需理由
+            </p>
+        </div>
+
+    </div>
+
+</body>
+</html>
