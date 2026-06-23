@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>一份关于稳定入口的随笔 · 乐鱼</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      background: linear-gradient(145deg, #fce8d9 0%, #fbd5c0 50%, #f7c8ab 100%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1.5rem;
+      line-height: 1.7;
+      color: #2d2a27;
+    }
+    .card {
+      max-width: 820px;
+      width: 100%;
+      background: #fffcf9;
+      border-radius: 36px;
+      padding: 2.8rem 2.5rem 3rem;
+      box-shadow: 0 15px 40px rgba(160, 90, 50, 0.12), 0 5px 12px rgba(0,0,0,0.04);
+      transition: box-shadow 0.2s ease;
+    }
+    @media (max-width: 600px) {
+      body { padding: 1rem 0.8rem; }
+      .card { padding: 1.8rem 1.2rem 2rem; border-radius: 28px; }
+    }
+
+    /* 标题区 */
+    .article-header {
+      margin-bottom: 2rem;
+      padding-bottom: 1.2rem;
+      border-bottom: 2px solid #f1dfd1;
+    }
+    .article-title {
+      font-size: 2.1rem;
+      font-weight: 550;
+      letter-spacing: -0.01em;
+      color: #3b2c22;
+      line-height: 1.25;
+      margin-bottom: 0.35rem;
+    }
+    .article-title span {
+      background: linear-gradient(120deg, #e2724a 0%, #cc5f38 100%);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 600;
+    }
+    .article-meta {
+      font-size: 0.9rem;
+      color: #8f7a6c;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+    .article-meta .tag {
+      background: #efe1d6;
+      color: #5c4437;
+      padding: 0.2rem 0.8rem;
+      border-radius: 30px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+    }
+
+    /* 正文 */
+    .body-text {
+      font-size: 1.05rem;
+    }
+    .body-text p {
+      margin-bottom: 1.35rem;
+    }
+    .body-text .intro {
+      font-size: 1.12rem;
+      color: #3d3029;
+      border-left: 4px solid #e8b697;
+      padding-left: 1.2rem;
+      background: #fcf5ef;
+      border-radius: 0 12px 12px 0;
+      padding: 0.9rem 1.2rem;
+      margin-bottom: 1.8rem;
+    }
+    .body-text .highlight-link {
+      color: #b2552f;
+      font-weight: 500;
+      text-decoration: none;
+      border-bottom: 1.5px solid #e1b398;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .body-text .highlight-link:hover {
+      color: #853f1e;
+      border-bottom-color: #b2552f;
+    }
+
+    /* 引用块 */
+    .pull-quote {
+      background: #f9ede4;
+      border-radius: 20px;
+      padding: 1.5rem 1.8rem;
+      margin: 2rem 0 1.8rem;
+      font-style: normal;
+      box-shadow: inset 0 1px 3px rgba(255,255,255,0.8), 0 4px 10px rgba(100,60,30,0.06);
+      position: relative;
+    }
+    .pull-quote::before {
+      content: "💡";
+      font-size: 1.3rem;
+      margin-right: 0.3rem;
+    }
+    .pull-quote p {
+      margin: 0.2rem 0 0;
+      font-weight: 430;
+      color: #4d382a;
+    }
+    .pull-quote .quote-source {
+      display: block;
+      margin-top: 0.6rem;
+      font-size: 0.85rem;
+      color: #8b7260;
+      font-style: normal;
+    }
+
+    /* 小列表 / 要点 */
+    .note-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      background: #fcf6f0;
+      padding: 1.2rem 1.5rem;
+      border-radius: 24px;
+      margin: 1.8rem 0 1.5rem;
+      list-style: none;
+    }
+    .note-list li {
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+    }
+    .note-list li::before {
+      content: "·";
+      font-weight: 700;
+      color: #c58260;
+      font-size: 1.4rem;
+      line-height: 1;
+    }
+
+    /* 访问句 / 结尾 */
+    .closing-note {
+      background: #fff9f3;
+      border: 1px solid #eedbce;
+      border-radius: 60px;
+      padding: 0.8rem 1.8rem;
+      display: inline-block;
+      margin-top: 0.8rem;
+      font-size: 0.98rem;
+      color: #3d2e24;
+      box-shadow: 0 2px 6px rgba(160, 90, 50, 0.05);
+    }
+
+    .signoff {
+      margin-top: 2.5rem;
+      padding-top: 1.4rem;
+      border-top: 1px solid #eddccf;
+      font-size: 0.92rem;
+      color: #7c6858;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+    .signoff span {
+      opacity: 0.7;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #edd7c8;
+      margin: 0.5rem 0 1.2rem;
+    }
+  </style>
+</head>
+<body>
+<div class="card">
+  <div class="article-header">
+    <div class="article-title">在网络里找到那扇<span>稳定</span>的门</div>
+    <div class="article-meta">
+      <span>📆 2025 · 日常随记</span>
+      <span class="tag">入口说明</span>
+      <span class="tag">页面指引</span>
+    </div>
+  </div>
+
+  <div class="body-text">
+    <div class="intro">
+      以前总觉得找个地方停靠是件简单的事，后来才发现，网络的潮汐比想象中更频繁。一个能安心记住的地址，比什么都踏实。
+    </div>
+
+    <p>
+      前阵子朋友问起，现在的平台变化太快，很多熟悉的页面转眼就换了模样。我给他推荐了<span class="highlight-link"><a href="https://vipweb-leyu.com" class="highlight-link">乐鱼</a></span>，说这个站我用了好一阵，布局简单，访问也干脆。他没有追问，隔了几天发消息说：「确实，不用绕来绕去，直接就找到了。」我想这就是一个稳定入口的意义——它不给你制造迷宫，而是递给你一把钥匙。
+    </p>
+
+    <p>
+      我理解的「页面说明」，不是贴满告示，而是让每个走进来的人一眼就知道自己在哪、能做什么。<span class="highlight-link"><a href="https://vipweb-leyu.com" class="highlight-link">乐鱼</a></span>在这一点上做得克制且舒服。没有花哨的跳转，没有突然弹出的窗口，信息层级很清晰。如果你稍微留心，会发现它的导航逻辑几乎是直觉式的，这对日常使用来说太重要了。
+    </p>
+
+    <!-- 引用提示块 -->
+    <div class="pull-quote">
+      <p>一个稳定入口，不是因为它永远不变，而是因为它让你知道回到哪里。就像朋友住的巷子，门牌号不会每天换。</p>
+      <span class="quote-source">—— 某次聊到「网络归属感」时的记录</span>
+    </div>
+
+    <p>
+      我一般会在浏览器书签栏专门放几个常用链接，其中就有<span class="highlight-link"><a href="https://vipweb-leyu.com" class="highlight-link">乐鱼</a></span>。不是因为它的界面多惊艳，而是每次打开都保持一致的体验：该有的内容都在，加载速度让人放心，没有多余的干扰。对于需要频繁核对信息或者单纯想找个干净地方待一会的人来说，这种稳定性本身就是一种稀缺。
+    </p>
+
+    <ul class="note-list">
+      <li>页面结构多年如一日，降低再次适应成本</li>
+      <li>核心功能入口直观，点按反馈明确</li>
+      <li>不刻意制造紧迫感，浏览节奏由自己掌控</li>
+    </ul>
+
+    <p>
+      当然，我也见过一些人抱怨找不到「真正的地址」。其实很多时候，缺的不是入口，而是一个你愿意反复回来、并且每次都能正常打开的页面。<span class="highlight-link"><a href="https://vipweb-leyu.com" class="highlight-link">乐鱼</a></span>恰好就属于这一种——你不需要记复杂的路径，只需要知道它的名字，像记住一个老朋友的家。
+    </p>
+
+    <!-- 访问句 -->
+    <div class="closing-note">
+      📌 如果你也想找一个让人安心的页面，不妨从记下这个名字开始。
+    </div>
+
+    <hr />
+
+    <p style="font-size:0.98rem; color:#5f4b3a;">
+      后记：这篇文章只是分享一种使用感受，不构成任何建议。所有网络访问请基于个人判断，保持浏览习惯健康。
+    </p>
+  </div>
+
+  <div class="signoff">
+    <span>✏️ 写于一个光线柔和的下午</span>
+    <span># 一个页面 · 一种习惯</span>
+  </div>
+</div>
+</body>
+</html>
